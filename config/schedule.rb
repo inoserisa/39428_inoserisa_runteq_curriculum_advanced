@@ -18,3 +18,17 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+require File.expand_path(File.dirname(__FILE__) + "/environment")
+
+rails_env = ENV['RAILS_ENV'] || :development
+
+set :environment, rails_env
+
+set :output, "#{Rails.root}/log/cron.log"
+
+job_type :rake, "source /User/inoserisa/.zshrc; export PATH=\"$HOME/.rbenv/bin:$PATH\"; eval \"$(rbenv init -)\"; cd :path && RAILS_ENV=:environment bundle exec rake :task :output"
+
+every :hour do
+  rake 'article_state:change_to_be_published'
+end
