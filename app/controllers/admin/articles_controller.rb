@@ -36,12 +36,12 @@ class Admin::ArticlesController < ApplicationController
 
     @article.assign_attributes(article_params)
     @article.adjust_state
-      if @article.save
-        flash[:notice] = '更新しました'
-        redirect_to edit_admin_article_path(@article.uuid)
-      else
-        render :edit
-      end
+    if @article.save
+      flash[:notice] = '更新しました'
+      redirect_to edit_admin_article_path(@article.uuid)
+    else
+      render :edit
+    end
   end
 
   def destroy
