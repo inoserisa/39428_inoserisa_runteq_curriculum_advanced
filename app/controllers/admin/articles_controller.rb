@@ -36,12 +36,12 @@ class Admin::ArticlesController < ApplicationController
 
     @article.assign_attributes(article_params)
     @article.adjust_state
-      if @article.save
-        flash[:notice] = '更新しました'
-        redirect_to edit_admin_article_path(@article.uuid)
-      else
-        render :edit
-      end
+    if @article.save
+      flash[:notice] = '更新しました'
+      redirect_to edit_admin_article_path(@article.uuid)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -61,7 +61,7 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def search_params
-    params[:q]&.permit(:title, :category_id)
+    params[:q]&.permit(:title, :body, :category_id, :author_id, :tag_id)
   end
 
   def set_article

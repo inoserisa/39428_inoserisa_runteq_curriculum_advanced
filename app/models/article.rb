@@ -63,6 +63,9 @@ class Article < ApplicationRecord
   scope :new_arrivals, -> { viewable.order(published_at: :desc) }
   scope :by_category, ->(category_id) { where(category_id: category_id) }
   scope :title_contain, ->(word) { where('title LIKE ?', "%#{word}%") }
+  scope :by_author, ->(author_id) { where(author_id: author_id) }
+  scope :by_tag, ->(tag_id) { joins(:article_tags).where(article_tags: { tag_id: tag_id }) }
+  scope :body_contain, ->(body) { joins(:sentences).merge(where('sentences.body LIKE ?', "%#{body}%")) }
   scope :past_published, -> { where('published_at <= ?', Time.current) }
 
   def build_body(controller)
@@ -109,8 +112,8 @@ class Article < ApplicationRecord
 
     self.state = if publishable?
                    :published
-                  else
+                 else
                    :publish_wait
-                  end
+                 end
   end
 end
