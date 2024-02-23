@@ -17,7 +17,8 @@
       .box-header
         h3.box-title 情報
 
-      = simple_form_for @article, url: admin_article_path(@article.uuid) do |f|
+      = simple_form_for @article, local: true, url: admin_article_path(@article.uuid) do |f|
+        = render 'layouts/error_messages', model: f.object
         .box-body
           - if @article.draft?
             .form-group
@@ -34,6 +35,8 @@
             = image_tag @article.eye_catch_url(:thumb), class: 'img-thumbnail'
             br
             br
+          = f.input :eyecatch_width, placeholder: '100'
+          = f.input_field :eyecatch_align, as: :radio_buttons
           = f.input :description, input_html: { class: 'js-autosize' }
           = f.input :author_id, as: :select2, collection: Author.pluck(:name, :id)
           = f.input :category_id, as: :select2, collection: Category.pluck(:name, :id)
