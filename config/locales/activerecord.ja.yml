@@ -41,10 +41,13 @@ ja:
         state: '状態'
         description: '概要'
         eye_catch: 'アイキャッチ'
+        eyecatch_width: ''
         category: 'カテゴリー'
         tag: 'タグ'
         author: '著者'
         published_at: '公開日'
+        eyecatch_align: '位置'
+        eyecatch_width: '横幅'
     errors:
       models:
         user:
@@ -56,5 +59,10 @@ ja:
             password_confirmation:
               blank: 'パスワードを再入力してください'
               confirmation: 'パスワードが異なります'
+        article:
+          attributes:
+            eyecatch_width:
+              less_than_or_equal_to: 'は700以下の値にしてください'
+              greater_than_or_equal_to: 'は100以上の値にしてください'
 
 
