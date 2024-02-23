@@ -20,5 +20,7 @@ module Blog
       g.assets false
       g.helper false
     end
+
+    config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
   end
 end
