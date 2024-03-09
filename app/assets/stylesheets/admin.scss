@@ -19,7 +19,7 @@
 }
 
 .image-icon {
-  height: 128pxx;
+  height: 128px;
   width: 128px;
 }
 
@@ -29,4 +29,16 @@
 
 .box + .insert-block {
   margin-top: -20px;
+}
+
+.main_images_box {
+  display: flex;
+  .main_image {
+    text-align: center;
+    padding: 1rem;
+    img {
+      display: block;
+      margin-bottom: 1rem;
+    }
+  }
 }
